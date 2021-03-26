@@ -79,7 +79,7 @@ jobs:
       - build-flutter-project
       - run:
           name: Analyze code
-          command: flutter analyze lib
+          command: flutter analyze --current-package
 
   test:
     description: "Run tests for Flutter"
