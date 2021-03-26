@@ -79,7 +79,7 @@ jobs:
       - build-flutter-project
       - run:
           name: Analyze code
-          command: flutter analyze --current-package
+          command: flutter analyze lib
 
   test:
     description: "Run tests for Flutter"
@@ -88,6 +88,8 @@ jobs:
     steps:
       - checkout
       - build-flutter-project
+      - build-flutter-project:
+          project: Examples/MagicWeather
       - run:
           name: Run tests
           command: flutter test
