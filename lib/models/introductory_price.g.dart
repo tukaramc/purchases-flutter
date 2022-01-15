@@ -8,13 +8,17 @@ part of 'introductory_price.dart';
 
 _$_IntroductoryPrice _$$_IntroductoryPriceFromJson(Map json) =>
     _$_IntroductoryPrice(
-      (json['price'] as num).toDouble(),
-      json['priceString'] as String,
-      json['period'] as String,
-      json['cycles'] as int,
-      $enumDecode(_$PeriodUnitEnumMap, json['periodUnit'],
-          unknownValue: PeriodUnit.unknown),
-      json['periodNumberOfUnits'] as int,
+      (json['price'] == null ? 0 : json['price'] as num).toDouble(),
+      json['priceString'] == null ? '' : json['priceString'] as String,
+      json['period'] == null ? '' : json['period'] as String,
+      json['cycles'] == null ? 0 : json['cycles'] as int,
+      json['periodUnit'] == null
+          ? PeriodUnit.unknown
+          : $enumDecode(_$PeriodUnitEnumMap, json['periodUnit'],
+              unknownValue: PeriodUnit.unknown),
+      json['periodNumberOfUnits'] == null
+          ? 0
+          : json['periodNumberOfUnits'] as int,
     );
 
 Map<String, dynamic> _$$_IntroductoryPriceToJson(
