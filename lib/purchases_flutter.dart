@@ -220,7 +220,8 @@ class Purchases {
       'oldSKU': upgradeInfo?.oldSKU,
       'prorationMode': prorationMode?.index
     });
-    return PurchaserInfo.fromJson(response['purchaserInfo']);
+    return PurchaserInfo.fromJson(
+        new Map<String, dynamic>.from(response['purchaserInfo']));
   }
 
   /// iOS only. Purchase a product applying a given discount.
