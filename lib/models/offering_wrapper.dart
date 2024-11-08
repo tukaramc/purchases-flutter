@@ -1,3 +1,5 @@
+// ignore: depend_on_referenced_packages
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package_wrapper.dart';
@@ -20,7 +22,6 @@ class Offering with _$Offering {
 
     /// Array of `Package` objects available for purchase.
     @JsonKey(name: 'availablePackages') List<Package> availablePackages, {
-
     /// Lifetime package type configured in the RevenueCat dashboard, if available.
     @JsonKey(name: 'lifetime') Package? lifetime,
 
