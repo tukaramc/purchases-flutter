@@ -43,9 +43,6 @@ public class PurchasesFlutterPlugin implements FlutterPlugin, MethodCallHandler,
 
     private static final String PURCHASER_INFO_UPDATED = "Purchases-PurchaserInfoUpdated";
 
-    // Only set registrar for v1 embedder.
-    @SuppressWarnings("deprecation")
-    private io.flutter.plugin.common.PluginRegistry.Registrar registrar;
     // Only set activity for v2 embedder. Always access activity from getActivity() method.
     @Nullable private Context applicationContext;
     @Nullable private MethodChannel channel;
@@ -57,23 +54,7 @@ public class PurchasesFlutterPlugin implements FlutterPlugin, MethodCallHandler,
     /**
      * Plugin registration.
      */
-    @SuppressWarnings("deprecation")
-    public static void registerWith(io.flutter.plugin.common.PluginRegistry.Registrar registrar) {
-        PurchasesFlutterPlugin instance = new PurchasesFlutterPlugin();
-        instance.onAttachedToEngine(registrar.messenger(), registrar.context());
-        instance.registrar = registrar;
-        registrar.addViewDestroyListener(new io.flutter.plugin.common.PluginRegistry.ViewDestroyListener() {
-            @Override
-            public boolean onViewDestroy(io.flutter.view.FlutterNativeView flutterNativeView) {
-                try {
-                    Purchases.getSharedInstance().close();
-                } catch (UninitializedPropertyAccessException e) {
-                    // there's no instance so all good
-                }
-                return false;
-            }
-        });
-    }
+   
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
@@ -116,7 +97,7 @@ public class PurchasesFlutterPlugin implements FlutterPlugin, MethodCallHandler,
     }
 
     public Activity getActivity() {
-        return registrar != null ? registrar.activity() : activity;
+        return activity; // Use the activity from the v2 embedding
     }
 
     @Override

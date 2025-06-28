@@ -18,7 +18,7 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _MyAppState extends State<InitialScreen> {
-  PurchaserInfo _purchaserInfo;
+  late PurchaserInfo _purchaserInfo;
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class UpsellScreen extends StatefulWidget {
 }
 
 class _UpsellScreenState extends State<UpsellScreen> {
-  Offerings _offerings;
+  late Offerings _offerings;
 
   @override
   void initState() {
@@ -79,7 +79,7 @@ class _UpsellScreenState extends State<UpsellScreen> {
   }
 
   Future<void> fetchData() async {
-    Offerings offerings;
+    late Offerings offerings;
     try {
       offerings = await Purchases.getOfferings();
     } on PlatformException catch (e) {
@@ -129,14 +129,14 @@ class _PurchaseButton extends StatelessWidget {
   final Package package;
 
   // ignore: public_member_api_docs
-  const _PurchaseButton({Key key, @required this.package}) : super(key: key);
+  const _PurchaseButton({Key? key, required this.package}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ElevatedButton(
         onPressed: () async {
           try {
             final purchaserInfo = await Purchases.purchasePackage(package);
-            final isPro = purchaserInfo.entitlements.all['pro_cat'].isActive;
+            final isPro = purchaserInfo.entitlements.all['pro_cat']!.isActive;
             if (isPro) {
               return CatsScreen();
             }
